@@ -1,12 +1,17 @@
 import logo from '../../assets/images/logo.png';
 import { Link } from "react-router-dom";
-import Button from '@mui/material/Button';
 import CountryDrop from '../CountryDrop';
 import { FaRegUser } from "react-icons/fa";
 import { IoBagOutline } from "react-icons/io5";
 import SearchBox from './SearchBox';
+import Navigation from './Navigation';
+import { MyContext } from '../../App';
+import { useContext } from 'react';
 
 const Header=()=>{
+
+  const context=useContext(MyContext);
+
   return(
     <>
        <div className="headerWrapper">
@@ -23,7 +28,10 @@ const Header=()=>{
                     <Link to={'/'}><img src={logo} alt='logo' /></Link>
                 </div>
                 <div className='col-sm-10 d-flex align-items-center part2'>
-                    <CountryDrop/>
+                  {
+                    context.countryList.length!==0 &&  <CountryDrop/>
+                  }
+                   
                     <SearchBox/>
 
 
@@ -42,18 +50,7 @@ const Header=()=>{
             </div>
         </header>
 
-        <nav>
-              <div className='container'>
-                 <div className='row'>
-                     <div className='col-sm-3 navPart1'>
-                        <Button className='allCatTab'></Button>
-                     </div>
-                     <div className='col-sm-9 navPart2'>
-
-                     </div>
-                 </div>
-              </div>
-        </nav>
+       <Navigation/>
     </div>
     </>
   );
